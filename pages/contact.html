@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Contact | My Website</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f7f5ff;
+            color: #222;
+        }
+
+
+        /* ================= NAVBAR ================= */
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: #090909;
+            padding: 18px 7%;
+            z-index: 1000;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.25);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 26px;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: #a78bfa;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        nav ul li a:hover,
+        nav ul li a.active {
+            color: #a78bfa;
+        }
+
+        .menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 28px;
+            cursor: pointer;
+        }
+
+
+        /* ================= CONTACT ================= */
+
+        .contact {
+            min-height: 100vh;
+            padding: 150px 8% 100px;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            background:
+                radial-gradient(
+                    circle at top left,
+                    rgba(139, 92, 246, 0.20),
+                    transparent 35%
+                ),
+                radial-gradient(
+                    circle at bottom right,
+                    rgba(167, 139, 250, 0.18),
+                    transparent 35%
+                ),
+                #f7f5ff;
+        }
+
+        .contact h1 {
+            font-size: 50px;
+            color: #111;
+            margin-bottom: 12px;
+        }
+
+        .contact h1 span {
+            color: #8b5cf6;
+        }
+
+        .contact-intro {
+            color: #777;
+            font-size: 16px;
+            text-align: center;
+            margin-bottom: 45px;
+        }
+
+
+        /* ================= FORM ================= */
+
+        .contact-form {
+            width: 100%;
+            max-width: 700px;
+
+            background: white;
+
+            padding: 40px;
+
+            border-radius: 22px;
+
+            border: 1px solid #eee;
+
+            box-shadow:
+                0 15px 40px rgba(0, 0, 0, 0.08);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+
+            color: #222;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+
+            padding: 15px;
+
+            border: 1px solid #ddd;
+
+            border-radius: 10px;
+
+            outline: none;
+
+            font-size: 14px;
+
+            background: #fafafa;
+
+            transition: 0.3s;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            border-color: #8b5cf6;
+
+            background: white;
+
+            box-shadow:
+                0 0 0 3px rgba(139, 92, 246, 0.10);
+        }
+
+        .contact-form textarea {
+            min-height: 160px;
+            resize: vertical;
+        }
+
+
+        /* ================= BUTTON ================= */
+
+        .send-btn {
+            width: 100%;
+
+            padding: 15px;
+
+            border: none;
+
+            border-radius: 10px;
+
+            background: #8b5cf6;
+
+            color: white;
+
+            font-size: 15px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+        .send-btn:hover {
+            background: #6d3eea;
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 10px 25px rgba(139, 92, 246, 0.30);
+        }
+
+
+        /* ================= CONTACT INFO ================= */
+
+        .contact-info {
+            margin-top: 40px;
+
+            display: flex;
+            justify-content: center;
+
+            gap: 25px;
+
+            flex-wrap: wrap;
+        }
+
+        .info-card {
+            background: white;
+
+            padding: 20px 30px;
+
+            border-radius: 15px;
+
+            text-align: center;
+
+            border: 1px solid #eee;
+
+            box-shadow:
+                0 10px 30px rgba(0, 0, 0, 0.06);
+        }
+
+        .info-card .icon {
+            font-size: 25px;
+            margin-bottom: 8px;
+        }
+
+        .info-card h3 {
+            font-size: 15px;
+            color: #111;
+            margin-bottom: 5px;
+        }
+
+        .info-card p {
+            font-size: 13px;
+            color: #777;
+        }
+
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            background: #090909;
+
+            color: #aaa;
+
+            text-align: center;
+
+            padding: 25px;
+        }
+
+        footer p {
+            font-size: 13px;
+        }
+
+
+        /* ================= MOBILE ================= */
+
+        @media (max-width: 850px) {
+
+            .menu-btn {
+                display: block;
+            }
+
+            nav ul {
+                display: none;
+
+                position: absolute;
+
+                top: 70px;
+                right: 7%;
+
+                width: 220px;
+
+                padding: 20px;
+
+                background: #111;
+
+                border-radius: 15px;
+
+                flex-direction: column;
+
+                gap: 20px;
+            }
+
+            nav ul.active {
+                display: flex;
+            }
+
+            .contact h1 {
+                font-size: 40px;
+            }
+
+            .contact-form {
+                padding: 25px;
+            }
+
+            .contact-info {
+                flex-direction: column;
+                width: 100%;
+                max-width: 500px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+
+    <!-- ================= NAVBAR ================= -->
+
+    <header>
+
+        <nav>
+
+            <div class="logo">
+                My<span>Website</span>
+            </div>
+
+            <button class="menu-btn" onclick="toggleMenu()">
+                ☰
+            </button>
+
+            <ul id="menu">
+
+                <li>
+                    <a href="index.html">
+                        Home
+                    </a>
+                </li>
+
+                <li>
+                    <a href="gallery.html">
+                        Gallery
+                    </a>
+                </li>
+
+                <li>
+                    <a href="services.html">
+                        Services
+                    </a>
+                </li>
+
+                <li>
+                    <a href="about.html">
+                        About
+                    </a>
+                </li>
+
+                <li>
+                    <a href="contact.html" class="active">
+                        Contact
+                    </a>
+                </li>
+
+            </ul>
+
+        </nav>
+
+    </header>
+
+
+    <!-- ================= CONTACT ================= -->
+
+    <section class="contact">
+
+        <h1>
+            Contact <span>Us</span>
+        </h1>
+
+        <p class="contact-intro">
+            Have a question or message? Send us a message below.
+        </p>
+
+
+        <!-- FORM -->
+
+        <form class="contact-form" id="contactForm">
+
+            <div class="form-group">
+
+                <label for="name">
+                    Your Name
+                </label>
+
+                <input
+                    type="text"
+                    id="name"
+                    placeholder="Enter your name"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="email">
+                    Your Email
+                </label>
+
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="Enter your email"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="subject">
+                    Subject
+                </label>
+
+                <input
+                    type="text"
+                    id="subject"
+                    placeholder="Enter subject"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="message">
+                    Your Message
+                </label>
+
+                <textarea
+                    id="message"
+                    placeholder="Write your message here..."
+                    required
+                ></textarea>
+
+            </div>
+
+
+            <button type="submit" class="send-btn">
+                Send Message
+            </button>
+
+        </form>
+
+
+        <!-- CONTACT INFO -->
+
+        <div class="contact-info">
+
+            <div class="info-card">
+
+                <div class="icon">
+                    📧
+                </div>
+
+                <h3>
+                    Email
+                </h3>
+
+                <p>
+                    mywebsite@email.com
+                </p>
+
+            </div>
+
+
+            <div class="info-card">
+
+                <div class="icon">
+                    📞
+                </div>
+
+                <h3>
+                    Phone
+                </h3>
+
+                <p>
+                    +63 900 000 0000
+                </p>
+
+            </div>
+
+
+            <div class="info-card">
+
+                <div class="icon">
+                    📍
+                </div>
+
+                <h3>
+                    Location
+                </h3>
+
+                <p>
+                    Cebu, Philippines
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        <p>
+            © 2026 My Website | All Rights Reserved
+        </p>
+
+    </footer>
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+
+    <script>
+
+        function toggleMenu() {
+
+            const menu = document.getElementById("menu");
+
+            menu.classList.toggle("active");
+
+        }
+
+
+        document.getElementById("contactForm").addEventListener("submit", function(event) {
+
+            event.preventDefault();
+
+            alert("Thank you! Your message has been sent.");
+
+            this.reset();
+
+        });
+
+    </script>
+
+
+</body>
+
+</html>

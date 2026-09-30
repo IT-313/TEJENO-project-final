@@ -1,20 +1,68 @@
-document.addEventListener("DOMContentLoaded", function () {
+// =========================
+// MOBILE MENU
+// =========================
 
-    // Welcome message
-    alert("Welcome to My Product Gallery!");
+const menuBtn = document.querySelector(".menu-btn");
+const menu = document.querySelector("nav ul");
 
-    // View Products button
-    const viewProducts = document.querySelector('a[href="gallery.html"]');
+if (menuBtn && menu) {
 
-    viewProducts.addEventListener("click", function () {
-        console.log("Opening Product Gallery...");
+    menuBtn.addEventListener("click", () => {
+        menu.classList.toggle("active");
     });
 
-    // Our Services button
-    const services = document.querySelector('a[href="services.html"]');
+    document.querySelectorAll("nav ul li a").forEach(link => {
 
-    services.addEventListener("click", function () {
-        console.log("Opening Services...");
+        link.addEventListener("click", () => {
+            menu.classList.remove("active");
+        });
+
+    });
+}
+
+
+// =========================
+// SERVICE POPUP
+// =========================
+
+function showService(title, description) {
+
+    const modal = document.getElementById("serviceModal");
+    const serviceTitle = document.getElementById("serviceTitle");
+    const serviceDescription =
+        document.getElementById("serviceDescription");
+
+    if (modal && serviceTitle && serviceDescription) {
+
+        serviceTitle.textContent = title;
+        serviceDescription.textContent = description;
+
+        modal.classList.add("show");
+    }
+}
+
+
+function closeService() {
+
+    const modal = document.getElementById("serviceModal");
+
+    if (modal) {
+        modal.classList.remove("show");
+    }
+}
+
+
+// Close popup when clicking outside
+const serviceModal = document.getElementById("serviceModal");
+
+if (serviceModal) {
+
+    serviceModal.addEventListener("click", (event) => {
+
+        if (event.target === serviceModal) {
+            closeService();
+        }
+
     });
 
-});
+}

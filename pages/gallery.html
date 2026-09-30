@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Gallery | My Website</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f7f5ff;
+            color: #222;
+        }
+
+        /* ================= NAVBAR ================= */
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: #090909;
+            padding: 18px 7%;
+            z-index: 1000;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.25);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 26px;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: #a78bfa;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        nav ul li a:hover,
+        nav ul li a.active {
+            color: #a78bfa;
+        }
+
+        .menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 28px;
+            cursor: pointer;
+        }
+
+        /* ================= GALLERY ================= */
+
+        .gallery {
+            min-height: 100vh;
+            padding: 150px 8% 100px;
+
+            background:
+                radial-gradient(
+                    circle at top left,
+                    rgba(139, 92, 246, 0.18),
+                    transparent 35%
+                ),
+                radial-gradient(
+                    circle at bottom right,
+                    rgba(167, 139, 250, 0.15),
+                    transparent 35%
+                ),
+                #f7f5ff;
+        }
+
+        .gallery-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .gallery-title h1 {
+            font-size: 50px;
+            color: #111;
+            margin-bottom: 15px;
+        }
+
+        .gallery-title h1 span {
+            color: #8b5cf6;
+        }
+
+        .gallery-title p {
+            color: #777;
+            font-size: 16px;
+        }
+
+        /* ================= CARDS ================= */
+
+        .cards {
+            max-width: 1200px;
+            margin: auto;
+
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+
+            gap: 30px;
+        }
+
+        .card {
+            background: white;
+
+            border-radius: 22px;
+            overflow: hidden;
+
+            border: 1px solid #eee;
+
+            box-shadow:
+                0 15px 40px rgba(0, 0, 0, 0.08);
+
+            transition: 0.4s;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+
+            border-color: #a78bfa;
+
+            box-shadow:
+                0 25px 55px rgba(139, 92, 246, 0.22);
+        }
+
+        .card-image {
+            overflow: hidden;
+            height: 240px;
+        }
+
+        .card img {
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+
+            display: block;
+
+            transition: 0.5s;
+        }
+
+        .card:hover img {
+            transform: scale(1.08);
+        }
+
+        .card-content {
+            padding: 25px;
+        }
+
+        .card h3 {
+            font-size: 21px;
+            color: #111;
+            margin-bottom: 12px;
+        }
+
+        .card p {
+            color: #777;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        .price {
+            display: inline-block;
+
+            margin-top: 15px;
+
+            color: #8b5cf6;
+
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            background: #090909;
+            color: #aaa;
+
+            text-align: center;
+
+            padding: 25px;
+        }
+
+        footer p {
+            font-size: 13px;
+        }
+
+        /* ================= MOBILE ================= */
+
+        @media (max-width: 850px) {
+
+            .menu-btn {
+                display: block;
+            }
+
+            nav ul {
+                display: none;
+
+                position: absolute;
+
+                top: 70px;
+                right: 7%;
+
+                width: 220px;
+
+                padding: 20px;
+
+                background: #111;
+
+                border-radius: 15px;
+
+                flex-direction: column;
+
+                gap: 20px;
+            }
+
+            nav ul.active {
+                display: flex;
+            }
+
+            .gallery-title h1 {
+                font-size: 38px;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+                max-width: 500px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+
+    <header>
+
+        <nav>
+
+            <div class="logo">
+                My<span>Website</span>
+            </div>
+
+            <button class="menu-btn" onclick="toggleMenu()">
+                ☰
+            </button>
+
+            <ul id="menu">
+
+                <li>
+                    <a href="index.html">
+                        Home
+                    </a>
+                </li>
+
+                <li>
+                    <a href="gallery.html" class="active">
+                        Gallery
+                    </a>
+                </li>
+
+                <li>
+                    <a href="services.html">
+                        Services
+                    </a>
+                </li>
+
+                <li>
+                    <a href="about.html">
+                        About
+                    </a>
+                </li>
+
+                <li>
+                    <a href="contact.html">
+                        Contact
+                    </a>
+                </li>
+
+            </ul>
+
+        </nav>
+
+    </header>
+
+
+    <!-- ================= GALLERY ================= -->
+
+    <section class="gallery">
+
+        <div class="gallery-title">
+
+            <h1>
+                Featured <span>Products</span>
+            </h1>
+
+            <p>
+                Explore our collection of stylish and premium products.
+            </p>
+
+        </div>
+
+
+        <div class="cards">
+
+
+            <!-- 1. Basketball Shoes -->
+
+            <div class="card">
+
+                <div class="card-image">
+
+                    <img
+                        src="https://i.pinimg.com/736x/51/fc/ca/51fcca98d8d60b4b500ab6f3984b22b3.jpg"
+                        alt="Basketball Shoes">
+
+                </div>
+
+                <div class="card-content">
+
+                    <h3>
+                        Basketball Shoes
+                    </h3>
+
+                    <p>
+                        Premium basketball shoes designed for comfort
+                        and style.
+                    </p>
+
+                    <span class="price">
+                        Premium Collection
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- 2. Stylish Backpack -->
+
+            <div class="card">
+
+                <div class="card-image">
+
+                    <img
+                        src="https://i.pinimg.com/736x/e4/42/c0/e442c019ce4979255dbc86e98eeee7d3.jpg"
+                        alt="Stylish Backpack">
+
+                </div>
+
+                <div class="card-content">
+
+                    <h3>
+                        Stylish Backpack
+                    </h3>
+
+                    <p>
+                        A premium backpack with a modern and
+                        elegant design.
+                    </p>
+
+                    <span class="price">
+                        Premium Collection
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- 3. Wireless Headphones -->
+
+            <div class="card">
+
+                <div class="card-image">
+
+                    <img
+                        src="https://m.media-amazon.com/images/I/61K4azdo8BL._AC_SL1500_.jpg"
+                        alt="Wireless Headphones">
+
+                </div>
+
+                <div class="card-content">
+
+                    <h3>
+                        Wireless Headphones
+                    </h3>
+
+                    <p>
+                        Premium wireless headphones for an immersive
+                        audio experience.
+                    </p>
+
+                    <span class="price">
+                        Premium Collection
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- 4. Classic Watch -->
+
+            <div class="card">
+
+                <div class="card-image">
+
+                    <img
+                        src="https://i.pinimg.com/736x/f7/4a/09/f74a093a94ca2f4fc6dd8d8318a2c4f6.jpg"
+                        alt="Classic Watch">
+
+                </div>
+
+                <div class="card-content">
+
+                    <h3>
+                        Classic Watch
+                    </h3>
+
+                    <p>
+                        An elegant timepiece with a classic and
+                        luxurious appearance.
+                    </p>
+
+                    <span class="price">
+                        Premium Collection
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- 5. Casual T-Shirt -->
+
+            <div class="card">
+
+                <div class="card-image">
+
+                    <img
+                        src="https://i.pinimg.com/736x/a8/dd/68/a8dd68317e9ddd26a2a1dad9f85bfe52.jpg"
+                        alt="Casual T-Shirt">
+
+                </div>
+
+                <div class="card-content">
+
+                    <h3>
+                        Casual T-Shirt
+                    </h3>
+
+                    <p>
+                        A clean and premium-looking shirt made for
+                        everyday style.
+                    </p>
+
+                    <span class="price">
+                        Premium Collection
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- 6. Bluetooth Speaker -->
+
+            <div class="card">
+
+                <div class="card-image">
+
+                    <img
+                        src="https://m.media-amazon.com/images/I/71gO6NMh1UL._AC_.jpg"
+                        alt="Bluetooth Speaker">
+
+                </div>
+
+                <div class="card-content">
+
+                    <h3>
+                        Bluetooth Speaker
+                    </h3>
+
+                    <p>
+                        A sleek portable speaker with powerful and
+                        clear sound.
+                    </p>
+
+                    <span class="price">
+                        Premium Collection
+                    </span>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        <p>
+            © 2026 My Website | All Rights Reserved
+        </p>
+
+    </footer>
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+
+    <script>
+
+        function toggleMenu() {
+
+            const menu = document.getElementById("menu");
+
+            menu.classList.toggle("active");
+
+        }
+
+    </script>
+
+</body>
+
+</html>

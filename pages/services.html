@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Services | My Website</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f5f3ff;
+            color: #222;
+        }
+
+        /* NAVBAR */
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: #090909;
+            padding: 18px 7%;
+            z-index: 1000;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.2);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 26px;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: #a78bfa;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        nav ul li a:hover,
+        nav ul li a.active {
+            color: #a78bfa;
+        }
+
+        .menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 28px;
+            cursor: pointer;
+        }
+
+
+        /* SERVICES */
+
+        .services {
+            min-height: 100vh;
+            padding: 150px 8% 100px;
+
+            background:
+                radial-gradient(
+                    circle at top left,
+                    rgba(139,92,246,0.18),
+                    transparent 35%
+                ),
+                radial-gradient(
+                    circle at bottom right,
+                    rgba(212,175,55,0.12),
+                    transparent 30%
+                ),
+                #f7f5ff;
+        }
+
+        .services-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .services-title h1 {
+            font-size: 50px;
+            color: #111;
+            margin-bottom: 15px;
+        }
+
+        .services-title h1 span {
+            color: #8b5cf6;
+        }
+
+        .services-title p {
+            color: #777;
+            max-width: 600px;
+            margin: auto;
+            font-size: 16px;
+        }
+
+
+        /* SERVICE CARDS */
+
+        .service-container {
+            max-width: 1100px;
+            margin: auto;
+
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .service {
+            position: relative;
+
+            background: white;
+            padding: 40px 30px;
+
+            border-radius: 25px;
+
+            text-align: center;
+
+            border: 1px solid #eee;
+
+            box-shadow:
+                0 15px 40px rgba(0,0,0,0.08);
+
+            transition: 0.4s;
+        }
+
+        .service:hover {
+            transform: translateY(-12px);
+
+            box-shadow:
+                0 25px 55px rgba(139,92,246,0.2);
+
+            border-color: #a78bfa;
+        }
+
+
+        /* ICON */
+
+        .service-icon {
+            width: 80px;
+            height: 80px;
+
+            margin: 0 auto 25px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            border-radius: 50%;
+
+            background: linear-gradient(
+                135deg,
+                #8b5cf6,
+                #c4b5fd
+            );
+
+            font-size: 35px;
+
+            box-shadow:
+                0 10px 25px rgba(139,92,246,0.3);
+
+            transition: 0.4s;
+        }
+
+        .service:hover .service-icon {
+            transform: rotate(8deg) scale(1.1);
+        }
+
+
+        /* TEXT */
+
+        .service h2 {
+            font-size: 23px;
+            margin-bottom: 15px;
+            color: #111;
+        }
+
+        .service p {
+            color: #777;
+            font-size: 14px;
+            line-height: 1.7;
+            margin-bottom: 25px;
+        }
+
+
+        /* BUTTON */
+
+        .service button {
+            padding: 12px 25px;
+
+            border: none;
+            border-radius: 30px;
+
+            background: linear-gradient(
+                135deg,
+                #8b5cf6,
+                #a78bfa
+            );
+
+            color: white;
+
+            font-size: 14px;
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+        .service button:hover {
+            transform: translateY(-3px);
+
+            box-shadow:
+                0 10px 25px rgba(139,92,246,0.35);
+        }
+
+
+        /* MODAL */
+
+        .modal {
+            display: none;
+
+            position: fixed;
+
+            top: 0;
+            left: 0;
+
+            width: 100%;
+            height: 100%;
+
+            background: rgba(0,0,0,0.75);
+
+            justify-content: center;
+            align-items: center;
+
+            padding: 20px;
+
+            z-index: 2000;
+        }
+
+        .modal-content {
+            position: relative;
+
+            background: white;
+
+            width: 100%;
+            max-width: 500px;
+
+            padding: 45px 35px;
+
+            border-radius: 25px;
+
+            text-align: center;
+
+            animation: popup 0.3s ease;
+        }
+
+        @keyframes popup {
+
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+        }
+
+        .close {
+            position: absolute;
+
+            top: 15px;
+            right: 20px;
+
+            width: 35px;
+            height: 35px;
+
+            border: none;
+
+            border-radius: 50%;
+
+            background: #eee;
+
+            font-size: 22px;
+
+            cursor: pointer;
+        }
+
+        .close:hover {
+            background: #8b5cf6;
+            color: white;
+        }
+
+        .modal-content h2 {
+            color: #8b5cf6;
+            margin-bottom: 15px;
+        }
+
+        .modal-content p {
+            color: #666;
+            line-height: 1.7;
+            margin-bottom: 25px;
+        }
+
+
+        /* FOOTER */
+
+        footer {
+            background: #090909;
+            color: #aaa;
+
+            text-align: center;
+
+            padding: 25px;
+        }
+
+        footer p {
+            font-size: 13px;
+        }
+
+
+        /* MOBILE */
+
+        @media (max-width: 850px) {
+
+            .menu-btn {
+                display: block;
+            }
+
+            nav ul {
+                display: none;
+
+                position: absolute;
+
+                top: 70px;
+                right: 7%;
+
+                width: 220px;
+
+                padding: 20px;
+
+                background: #111;
+
+                border-radius: 15px;
+
+                flex-direction: column;
+
+                gap: 20px;
+            }
+
+            nav ul.active {
+                display: flex;
+            }
+
+            .service-container {
+                grid-template-columns: 1fr;
+                max-width: 500px;
+            }
+
+            .services-title h1 {
+                font-size: 38px;
+            }
+
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+<!-- NAVBAR -->
+
+<header>
+
+    <nav>
+
+        <div class="logo">
+            My<span>Website</span>
+        </div>
+
+        <button class="menu-btn" onclick="toggleMenu()">
+            ☰
+        </button>
+
+        <ul id="menu">
+
+            <li>
+                <a href="index.html">
+                    Home
+                </a>
+            </li>
+
+            <li>
+                <a href="gallery.html">
+                    Gallery
+                </a>
+            </li>
+
+            <li>
+                <a href="services.html" class="active">
+                    Services
+                </a>
+            </li>
+
+            <li>
+                <a href="about.html">
+                    About
+                </a>
+            </li>
+
+            <li>
+                <a href="contact.html">
+                    Contact
+                </a>
+            </li>
+
+        </ul>
+
+    </nav>
+
+</header>
+
+
+<!-- SERVICES -->
+
+<section class="services">
+
+    <div class="services-title">
+
+        <h1>
+            Our <span>Services</span>
+        </h1>
+
+        <p>
+            Explore our convenient services designed to give
+            our customers a simple, easy, and enjoyable experience.
+        </p>
+
+    </div>
+
+
+    <div class="service-container">
+
+
+        <!-- SERVICE 1 -->
+
+        <div class="service">
+
+            <div class="service-icon">
+                🛍️
+            </div>
+
+            <h2>
+                Online Shopping
+            </h2>
+
+            <p>
+                Shop for quality products easily and conveniently
+                from our online collection.
+            </p>
+
+            <button
+                onclick="showService(
+                'Online Shopping',
+                'Our online shopping service allows customers to browse and purchase products easily and conveniently.'
+                )">
+
+                View Service
+
+            </button>
+
+        </div>
+
+
+        <!-- SERVICE 2 -->
+
+        <div class="service">
+
+            <div class="service-icon">
+                🚚
+            </div>
+
+            <h2>
+                Fast Delivery
+            </h2>
+
+            <p>
+                We help make sure your orders are delivered
+                safely and conveniently.
+            </p>
+
+            <button
+                onclick="showService(
+                'Fast Delivery',
+                'Our delivery service helps customers receive their orders safely and conveniently.'
+                )">
+
+                View Service
+
+            </button>
+
+        </div>
+
+
+        <!-- SERVICE 3 -->
+
+        <div class="service">
+
+            <div class="service-icon">
+                💬
+            </div>
+
+            <h2>
+                Customer Support
+            </h2>
+
+            <p>
+                Get assistance and answers to your questions
+                whenever you need help.
+            </p>
+
+            <button
+                onclick="showService(
+                'Customer Support',
+                'Our customer support service is available to help answer questions and concerns.'
+                )">
+
+                View Service
+
+            </button>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<!-- MODAL -->
+
+<div class="modal" id="serviceModal">
+
+    <div class="modal-content">
+
+        <button
+            class="close"
+            onclick="closeService()">
+
+            ×
+
+        </button>
+
+        <h2 id="serviceTitle">
+            Service
+        </h2>
+
+        <p id="serviceDescription">
+            Description
+        </p>
+
+        <button
+            onclick="closeService()"
+            style="
+                padding:12px 28px;
+                border:none;
+                border-radius:30px;
+                background:#8b5cf6;
+                color:white;
+                cursor:pointer;
+            ">
+
+            Close
+
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+    <p>
+        © 2026 My Website | All Rights Reserved
+    </p>
+
+</footer>
+
+
+<script>
+
+    /* MOBILE MENU */
+
+    function toggleMenu() {
+
+        const menu = document.getElementById("menu");
+
+        menu.classList.toggle("active");
+
+    }
+
+
+    /* SERVICE POPUP */
+
+    function showService(title, description) {
+
+        document.getElementById("serviceTitle").textContent = title;
+
+        document.getElementById("serviceDescription").textContent = description;
+
+        document.getElementById("serviceModal").style.display = "flex";
+
+    }
+
+
+    /* CLOSE POPUP */
+
+    function closeService() {
+
+        document.getElementById("serviceModal").style.display = "none";
+
+    }
+
+
+    /* CLOSE WHEN CLICKING OUTSIDE */
+
+    window.onclick = function(event) {
+
+        const modal = document.getElementById("serviceModal");
+
+        if (event.target === modal) {
+
+            closeService();
+
+        }
+
+    }
+
+</script>
+
+
+</body>
+
+</html>
