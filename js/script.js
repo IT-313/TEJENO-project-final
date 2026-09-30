@@ -1,206 +1,94 @@
+// ===============================
+// BACK TO TOP BUTTON
+// ===============================
 
-const menuBtn = document.getElementById("menu-btn");
-const menu = document.getElementById("menu");
-
-menuBtn.addEventListener("click", () => {
-    menu.classList.toggle("active");
-});
-
-document.querySelectorAll("#menu a").forEach(link => {
-    link.addEventListener("click", () => {
-        menu.classList.remove("active");
-    });
-});
-
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-
-    anchor.addEventListener("click", function(e) {
-
-        e.preventDefault();
-
-        const target = document.querySelector(this.getAttribute("href"));
-
-        if(target){
-            target.scrollIntoView({
-                behavior: "smooth"
-            });
-        }
-
-    });
-
-});
-
-const header = document.querySelector("header");
-
-window.addEventListener("scroll", () => {
-
-    if(window.scrollY > 80){
-
-        header.style.background = "#000";
-        header.style.boxShadow = "0 5px 20px rgba(0,0,0,.3)";
-
-    }else{
-
-        header.style.background = "#111";
-        header.style.boxShadow = "none";
-
-    }
-
-});
-
-const sections = document.querySelectorAll("section");
-const navLinks = document.querySelectorAll("#menu a");
-
-window.addEventListener("scroll", () => {
-
-    let current = "";
-
-    sections.forEach(section => {
-
-        const sectionTop = section.offsetTop - 120;
-        const sectionHeight = section.clientHeight;
-
-        if(window.pageYOffset >= sectionTop){
-            current = section.getAttribute("id");
-        }
-
-    });
-
-    navLinks.forEach(link => {
-
-        link.classList.remove("active");
-
-        if(link.getAttribute("href") === "#" + current){
-            link.classList.add("active");
-        }
-
-    });
-
-});
-const cards = document.querySelectorAll(".card, .service");
-
-const observer = new IntersectionObserver((entries)=>{
-
-    entries.forEach(entry=>{
-
-        if(entry.isIntersecting){
-
-            entry.target.style.opacity = "1";
-            entry.target.style.transform = "translateY(0)";
-
-        }
-
-    });
-
-},{
-    threshold:0.2
-});
-
-cards.forEach(card=>{
-
-    card.style.opacity="0";
-    card.style.transform="translateY(40px)";
-    card.style.transition=".7s ease";
-
-    observer.observe(card);
-
-});
-
-const form = document.querySelector("form");
-
-if(form){
-
-form.addEventListener("submit", function(e){
-
-    e.preventDefault();
-
-    const name=form.querySelector('input[type="text"]').value.trim();
-    const email=form.querySelector('input[type="email"]').value.trim();
-    const message=form.querySelector("textarea").value.trim();
-
-    if(name==="" || email==="" || message===""){
-        alert("Please fill in all fields.");
-        return;
-    }
-
-    alert("Thank you for contacting Eventora!");
-    form.reset();
-
-});
-
-}
-;
 const topBtn = document.createElement("button");
 
-topBtn.innerHTML="↑";
-
-topBtn.id="topBtn";
+topBtn.innerHTML = "↑";
+topBtn.id = "topBtn";
 
 document.body.appendChild(topBtn);
 
-topBtn.style.position="fixed";
-topBtn.style.bottom="25px";
-topBtn.style.right="25px";
-topBtn.style.width="55px";
-topBtn.style.height="55px";
-topBtn.style.border="none";
-topBtn.style.borderRadius="50%";
-topBtn.style.background="#FFD700";
-topBtn.style.color="#111";
-topBtn.style.fontSize="22px";
-topBtn.style.fontWeight="bold";
-topBtn.style.cursor="pointer";
-topBtn.style.display="none";
-topBtn.style.zIndex="999";
-topBtn.style.boxShadow="0 5px 15px rgba(0,0,0,.3)";
-topBtn.style.transition=".3s";
+topBtn.style.position = "fixed";
+topBtn.style.bottom = "25px";
+topBtn.style.right = "25px";
+topBtn.style.width = "50px";
+topBtn.style.height = "50px";
+topBtn.style.border = "none";
+topBtn.style.borderRadius = "50%";
+topBtn.style.background = "#212529";
+topBtn.style.color = "white";
+topBtn.style.fontSize = "22px";
+topBtn.style.cursor = "pointer";
+topBtn.style.display = "none";
+topBtn.style.zIndex = "9999";
 
-window.addEventListener("scroll",()=>{
 
-    if(window.scrollY>400){
+// Show button while scrolling
+window.addEventListener("scroll", function () {
 
-        topBtn.style.display="block";
-
-    }else{
-
-        topBtn.style.display="none";
-
+    if (window.scrollY > 300) {
+        topBtn.style.display = "block";
+    } else {
+        topBtn.style.display = "none";
     }
 
 });
 
-topBtn.addEventListener("click",()=>{
+
+// Go to top
+topBtn.addEventListener("click", function () {
 
     window.scrollTo({
-
-        top:0,
-
-        behavior:"smooth"
-
+        top: 0,
+        behavior: "smooth"
     });
 
 });
-topBtn.addEventListener("mouseover",()=>{
 
-    topBtn.style.background="#ffffff";
 
-});
+// ===============================
+// CONTACT FORM
+// ===============================
 
-topBtn.addEventListener("mouseout",()=>{
+const form = document.querySelector("form");
 
-    topBtn.style.background="#FFD700";
+if (form) {
 
-});
+    form.addEventListener("submit", function (e) {
 
-window.addEventListener("load",()=>{
+        e.preventDefault();
 
-    console.log("Welcome to Eventora!");
+        const name = document.getElementById("name");
+        const email = document.getElementById("email");
+        const message = document.getElementById("message");
 
-});
-const year = new Date().getFullYear();
+        if (
+            name &&
+            email &&
+            message &&
+            name.value.trim() !== "" &&
+            email.value.trim() !== "" &&
+            message.value.trim() !== ""
+        ) {
 
-const footer = document.querySelector("footer p");
+            alert("Thank you for contacting us!");
 
-if (footer) {
-    footer.innerHTML = `© ${year} Eventora | All Rights Reserved`;
+            form.reset();
+
+        } else {
+
+            alert("Please fill in all required fields.");
+
+        }
+
+    });
+
 }
+
+
+// ===============================
+// WEBSITE LOADED
+// ===============================
+
+console.log("Website loaded successfully!");
